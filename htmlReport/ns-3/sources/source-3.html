@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > TokenFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.model.config</a>
+</div>
+
+<h1>Coverage Summary for Class: TokenFilter (br.edu.ifpb.dac.sape.model.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokenFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    17,6%
+  </span>
+  <span class="absValue">
+    (3/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.model.config;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import javax.servlet.FilterChain;
+&nbsp;import javax.servlet.ServletException;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;
+&nbsp;import org.hibernate.Criteria;
+&nbsp;import org.hibernate.FetchMode;
+&nbsp;import org.hibernate.Hibernate;
+&nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.context.SecurityContextHolder;
+&nbsp;import org.springframework.web.filter.OncePerRequestFilter;
+&nbsp;
+&nbsp;import service.business.br.edu.ifpb.saac.TokenService;
+&nbsp;import service.business.br.edu.ifpb.saac.UserService;
+&nbsp;import entity.model.br.edu.ifpb.saac.User;
+&nbsp;
+&nbsp;public class TokenFilter extends OncePerRequestFilter {
+&nbsp;
+&nbsp;	private TokenService tokenService;
+&nbsp;	private UserService userService;
+&nbsp;
+<b class="fc">&nbsp;	public TokenFilter(TokenService tokenService, UserService userService) {</b>
+<b class="fc">&nbsp;		this.tokenService = tokenService;</b>
+<b class="fc">&nbsp;		this.userService = userService;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// filtra as requisições e faz autenticação se o token for válido
+&nbsp;	@Override
+&nbsp;	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+&nbsp;			throws ServletException, IOException {
+&nbsp;
+<b class="nc">&nbsp;		String token = tokenService.get(request);</b>
+&nbsp;		
+&nbsp;		// TODO tratamento para exceções do método &quot;doFilterInternal&quot; ?
+<b class="nc">&nbsp;		if (tokenService.isValid(token)) {</b>
+&nbsp;			try {
+&nbsp;				
+<b class="nc">&nbsp;				authenticate(token);</b>
+<b class="nc">&nbsp;			} catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;				e.printStackTrace();</b>
+<b class="nc">&nbsp;			} catch (Exception e) {</b>
+<b class="nc">&nbsp;				e.printStackTrace();</b>
+<b class="nc">&nbsp;			}</b>
+&nbsp;		}
+&nbsp;
+<b class="nc">&nbsp;		filterChain.doFilter(request, response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	// coloca o usuário autenticado no contexto do Spring Security
+&nbsp;	private void authenticate(String token) throws NumberFormatException, Exception {
+<b class="nc">&nbsp;		int userId = tokenService.getUserId(token);</b>
+&nbsp;	
+&nbsp;		//TODO comportamento inesperado de User: o retorno da linha abaixo é uma exceção
+<b class="nc">&nbsp;		User user = userService.findById(userId);</b>
+&nbsp;
+&nbsp;		
+<b class="nc">&nbsp;		UsernamePasswordAuthenticationToken authentication = </b>
+<b class="nc">&nbsp;				new UsernamePasswordAuthenticationToken(user, null,	user.getAuthorities());</b>
+<b class="nc">&nbsp;		SecurityContextHolder.getContext().setAuthentication(authentication);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

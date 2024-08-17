@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > LoginConverterService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.business.service</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginConverterService (br.edu.ifpb.dac.sape.business.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginConverterService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3,6%
+  </span>
+  <span class="absValue">
+    (1/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.business.service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.google.gson.Gson;
+&nbsp;import com.google.gson.JsonElement;
+&nbsp;import com.google.gson.JsonObject;
+&nbsp;import com.google.gson.JsonParser;
+&nbsp;
+&nbsp;import service.business.br.edu.ifpb.saac.RoleService.AVALIABLE_ROLES;
+&nbsp;import entity.model.br.edu.ifpb.saac.Role;
+&nbsp;import entity.model.br.edu.ifpb.saac.User;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class LoginConverterService {</b>
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private RoleService roleService;
+&nbsp;	
+&nbsp;	public String jsonToToken(String json) {
+<b class="nc">&nbsp;		if(json == null) {</b>
+<b class="nc">&nbsp;			return null;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		JsonElement jsonElement = JsonParser.parseString(json);</b>
+<b class="nc">&nbsp;		String token = jsonElement.getAsJsonObject().get(&quot;access&quot;).getAsString();</b>
+<b class="nc">&nbsp;		return token;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public User jsonToUser(String json) {
+<b class="nc">&nbsp;		JsonElement jsonElement = JsonParser.parseString(json);</b>
+<b class="nc">&nbsp;		JsonObject jsonObject = jsonElement.getAsJsonObject()</b>
+<b class="nc">&nbsp;											.get(&quot;results&quot;)</b>
+<b class="nc">&nbsp;											.getAsJsonArray()</b>
+<b class="nc">&nbsp;											.get(0)</b>
+<b class="nc">&nbsp;											.getAsJsonObject();</b>
+&nbsp;		
+<b class="nc">&nbsp;		String name = jsonObject.get(&quot;nome&quot;).getAsString();</b>
+<b class="nc">&nbsp;		String registration = jsonObject.get(&quot;matricula&quot;).getAsString();</b>
+&nbsp;		
+<b class="nc">&nbsp;		List&lt;Role&gt; roles = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;		roles.add(roleService.findDefault());</b>
+&nbsp;		
+&nbsp;		try {
+&nbsp;			// lança exceção se não encontrar o usuário servidor no SUAP
+<b class="nc">&nbsp;			roles.add(roleService.findByName(AVALIABLE_ROLES.EMPLOYEE.name()));</b>
+<b class="nc">&nbsp;		} catch (Exception e) {</b>
+<b class="nc">&nbsp;			roles.add(roleService.findByName(AVALIABLE_ROLES.STUDENT.name()));</b>
+<b class="nc">&nbsp;		}</b>
+&nbsp;		
+<b class="nc">&nbsp;		User user = new User();</b>
+<b class="nc">&nbsp;		user.setName(name);</b>
+<b class="nc">&nbsp;		user.setRegistration(Long.parseLong(registration));</b>
+<b class="nc">&nbsp;		user.setRoles(roles);</b>
+&nbsp;		
+<b class="nc">&nbsp;		return user;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public String mapToJson(Map&lt;String, String&gt; map) {
+<b class="nc">&nbsp;		Gson gson = new Gson();</b>
+<b class="nc">&nbsp;		String json = gson.toJson(map);</b>
+<b class="nc">&nbsp;		return json;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

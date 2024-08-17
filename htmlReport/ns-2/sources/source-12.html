@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > UserConverterService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.business.service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserConverterService (br.edu.ifpb.dac.sape.business.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserConverterService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,4%
+  </span>
+  <span class="absValue">
+    (1/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.business.service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import entity.model.br.edu.ifpb.saac.Role;
+&nbsp;import entity.model.br.edu.ifpb.saac.User;
+&nbsp;import dto.presentation.br.edu.ifpb.saac.UserDTO;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class UserConverterService {</b>
+&nbsp;	
+&nbsp;	public User dtoToUser(UserDTO dto) {
+<b class="nc">&nbsp;		if (dto != null) {</b>
+<b class="nc">&nbsp;			User entity = new User();</b>
+&nbsp;			
+<b class="nc">&nbsp;			entity.setId(dto.getId());</b>
+<b class="nc">&nbsp;			entity.setName(dto.getName());</b>
+<b class="nc">&nbsp;			entity.setEmail(dto.getEmail());</b>
+<b class="nc">&nbsp;			entity.setRegistration(dto.getRegistration());</b>
+<b class="nc">&nbsp;			entity.setRoles((List&lt;Role&gt;) dto.getRoles());</b>
+<b class="nc">&nbsp;			entity.setSportsFavorite(dto.getSportsFavorite());</b>
+&nbsp;			
+&nbsp;			
+<b class="nc">&nbsp;			return entity;</b>
+&nbsp;		}
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public UserDTO userToDto(User entity) {
+<b class="nc">&nbsp;		if (entity != null) {</b>
+<b class="nc">&nbsp;			UserDTO dto = new UserDTO();</b>
+&nbsp;			
+<b class="nc">&nbsp;			dto.setId(entity.getId());</b>
+<b class="nc">&nbsp;			dto.setName(entity.getName());</b>
+<b class="nc">&nbsp;			dto.setEmail(entity.getEmail());</b>
+<b class="nc">&nbsp;			dto.setRegistration(entity.getRegistration());</b>
+<b class="nc">&nbsp;			dto.setRoles((List&lt;Role&gt;) entity.getAuthorities());</b>
+<b class="nc">&nbsp;			dto.setSportsFavorite(entity.getSportsFavorite());</b>
+&nbsp;			
+<b class="nc">&nbsp;			return dto;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public List&lt;User&gt; dtosToUsers(List&lt;UserDTO&gt; dtoList) {
+&nbsp;
+<b class="nc">&nbsp;		if (dtoList != null) {</b>
+<b class="nc">&nbsp;			List&lt;User&gt; entityList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;			User entity = null;</b>
+&nbsp;
+<b class="nc">&nbsp;			if (dtoList != null &amp;&amp; !dtoList.isEmpty()) {</b>
+<b class="nc">&nbsp;				for (UserDTO dto : dtoList) {</b>
+<b class="nc">&nbsp;					entity = dtoToUser(dto);</b>
+<b class="nc">&nbsp;					entityList.add(entity);</b>
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+&nbsp;
+<b class="nc">&nbsp;			return entityList;</b>
+&nbsp;		}
+&nbsp;
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public List&lt;UserDTO&gt; usersToDtos(List&lt;User&gt; entityList) {
+<b class="nc">&nbsp;		if (entityList != null) {</b>
+<b class="nc">&nbsp;			List&lt;UserDTO&gt; dtoList = new ArrayList&lt;&gt;();</b>
+&nbsp;			
+<b class="nc">&nbsp;			UserDTO dto = null;</b>
+&nbsp;			
+<b class="nc">&nbsp;			if (entityList != null &amp;&amp; !entityList.isEmpty()) {</b>
+<b class="nc">&nbsp;				for (User user: entityList) {</b>
+<b class="nc">&nbsp;					dto = userToDto(user);</b>
+<b class="nc">&nbsp;					dto.setSportsFavorite(user.getSportsFavorite());</b>
+<b class="nc">&nbsp;					dtoList.add(dto);</b>
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+&nbsp;			
+<b class="nc">&nbsp;			return dtoList;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

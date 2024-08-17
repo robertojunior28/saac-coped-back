@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Role</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.model.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Role (br.edu.ifpb.dac.sape.model.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Role</td>
+<td class="coverageStat">
+  <span class="percent">
+    14,3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14,3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Role$HibernateProxy$nc0ur8Jp</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    14,3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14,3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.model.entity;
+&nbsp;
+&nbsp;import javax.persistence.Entity;
+&nbsp;import javax.persistence.GeneratedValue;
+&nbsp;import javax.persistence.GenerationType;
+&nbsp;import javax.persistence.Id;
+&nbsp;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;
+&nbsp;@Entity
+<b class="fc">&nbsp;public class Role implements GrantedAuthority {</b>
+&nbsp;
+&nbsp;	private static final long serialVersionUID = 1L;
+&nbsp;	
+&nbsp;	@Id
+&nbsp;	@GeneratedValue(strategy = GenerationType.AUTO)
+&nbsp;	private Integer id;
+&nbsp;	private String name;
+&nbsp;	
+&nbsp;	public Integer getId() {
+<b class="nc">&nbsp;		return id;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void setId(Integer id) {
+<b class="nc">&nbsp;		this.id = id;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public String getName() {
+<b class="nc">&nbsp;		return name;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void setName(String name) {
+<b class="nc">&nbsp;		this.name = name;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	@Override
+&nbsp;	public String toString() {
+<b class="nc">&nbsp;		return &quot;Role [id=&quot; + id + &quot;, name=&quot; + name + &quot;]&quot;;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Override
+&nbsp;	public String getAuthority() {
+<b class="nc">&nbsp;		return getName();</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > SchedulingDTO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.presentation.dto</a>
+</div>
+
+<h1>Coverage Summary for Class: SchedulingDTO (br.edu.ifpb.dac.sape.presentation.dto)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SchedulingDTO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.presentation.dto;
+&nbsp;
+&nbsp;import java.time.LocalTime;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import javax.validation.constraints.NotBlank;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;import javax.validation.constraints.Pattern;
+&nbsp;import javax.validation.constraints.Size;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;
+&nbsp;import br.edu.ifpb.dac.sape.model.enums.IsPresent;
+&nbsp;import br.edu.ifpb.dac.sape.model.enums.StatusScheduling;
+&nbsp;
+&nbsp;public class SchedulingDTO {
+&nbsp;	
+&nbsp;	private Integer id;
+&nbsp;	
+&nbsp;	@NotBlank(message = &quot;É obrigatório informar a data da prática!&quot;)
+&nbsp;	@Pattern(regexp = &quot;^\\d\\d\\d\\d-\\d\\d-\\d\\d$&quot;,
+&nbsp;			message = &quot;A data deve ter formato &#39;yyyy-MM-dd&#39;&quot;)
+&nbsp;	private String scheduledDate;
+&nbsp;	
+&nbsp;	@NotBlank(message = &quot;É obrigatório informar o horário de início da prática!&quot;)
+&nbsp;	@Pattern(regexp = &quot;^\\d\\d:\\d\\d$&quot;,
+&nbsp;			message = &quot;O horário de início deve ter formato &#39;HH:mm&#39;&quot;)
+&nbsp;	private String scheduledStartTime;
+&nbsp;	
+&nbsp;	@NotBlank(message = &quot;É obrigatório informar o horário de término da prática!&quot;)
+&nbsp;	@Pattern(regexp = &quot;^\\d\\d:\\d\\d$&quot;,
+&nbsp;			message = &quot;O horário de término deve ter formato &#39;HH:mm&#39;&quot;)
+&nbsp;	private String scheduledFinishTime;
+&nbsp;	
+&nbsp;	@NotNull(message = &quot;O id do local não pode ser nulo!&quot;)
+&nbsp;	private Integer placeId;
+&nbsp;	
+&nbsp;	@NotNull(message = &quot;O id do esporte não pode ser nulo!&quot;)
+&nbsp;	private Integer sportId;
+&nbsp;	
+&nbsp;	private Long creator;
+&nbsp;	
+&nbsp;	private StatusScheduling status;
+&nbsp;	
+&nbsp;	private IsPresent willBePresent;
+&nbsp;	
+<b class="nc">&nbsp;	public SchedulingDTO() {</b>
+&nbsp;		
+&nbsp;	}
+&nbsp;	
+&nbsp;	public SchedulingDTO(Integer id, String scheduledDate, String scheduledStartTime, String scheduledFinishTime, LocalTime startTime,  
+<b class="nc">&nbsp;			Integer placeId, Integer sportId,Long creator, StatusScheduling status,IsPresent isPresent) {</b>
+<b class="nc">&nbsp;		this.id = id;</b>
+<b class="nc">&nbsp;		this.scheduledDate = scheduledDate;</b>
+<b class="nc">&nbsp;		this.scheduledStartTime = scheduledStartTime;</b>
+<b class="nc">&nbsp;		this.scheduledFinishTime = scheduledFinishTime;</b>
+<b class="nc">&nbsp;		this.placeId = placeId;</b>
+<b class="nc">&nbsp;		this.sportId = sportId;</b>
+<b class="nc">&nbsp;		this.creator = creator;</b>
+<b class="nc">&nbsp;		this.status = status;</b>
+<b class="nc">&nbsp;		this.willBePresent =  isPresent;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public Integer getId() {
+<b class="nc">&nbsp;		return id;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setId(Integer id) {
+<b class="nc">&nbsp;		this.id = id;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public String getScheduledDate() {
+<b class="nc">&nbsp;		return scheduledDate;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setScheduledDate(String scheduledDate) {
+<b class="nc">&nbsp;		this.scheduledDate = scheduledDate;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public String getScheduledStartTime() {
+<b class="nc">&nbsp;		return scheduledStartTime;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setScheduledStartTime(String scheduledStartTime) {
+<b class="nc">&nbsp;		this.scheduledStartTime = scheduledStartTime;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public String getScheduledFinishTime() {
+<b class="nc">&nbsp;		return scheduledFinishTime;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setScheduledFinishTime(String scheduledFinishTime) {
+<b class="nc">&nbsp;		this.scheduledFinishTime = scheduledFinishTime;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public Integer getPlaceId() {
+<b class="nc">&nbsp;		return placeId;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setPlaceId(Integer placeId) {
+<b class="nc">&nbsp;		this.placeId = placeId;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public Integer getSportId() {
+<b class="nc">&nbsp;		return sportId;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setSportId(Integer sportId) {
+<b class="nc">&nbsp;		this.sportId = sportId;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public Long getCreator() {
+<b class="nc">&nbsp;		return creator;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setCreator(Long creator) {
+<b class="nc">&nbsp;		this.creator = creator;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public StatusScheduling getStatus() {
+<b class="nc">&nbsp;		return status;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setStatus(StatusScheduling status) {
+<b class="nc">&nbsp;		this.status = status;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public IsPresent getWillBePresent() {
+<b class="nc">&nbsp;		return willBePresent;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public void setWillBePresent(IsPresent willBePresent) {
+<b class="nc">&nbsp;		this.willBePresent = willBePresent;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Override
+&nbsp;	public int hashCode() {
+<b class="nc">&nbsp;		return Objects.hash(id, placeId, scheduledDate, scheduledFinishTime, scheduledStartTime, sportId);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Override
+&nbsp;	public boolean equals(Object obj) {
+<b class="nc">&nbsp;		if (this == obj)</b>
+<b class="nc">&nbsp;			return true;</b>
+<b class="nc">&nbsp;		if (obj == null)</b>
+<b class="nc">&nbsp;			return false;</b>
+<b class="nc">&nbsp;		if (getClass() != obj.getClass())</b>
+<b class="nc">&nbsp;			return false;</b>
+<b class="nc">&nbsp;		SchedulingDTO other = (SchedulingDTO) obj;</b>
+<b class="nc">&nbsp;		return Objects.equals(id, other.id) &amp;&amp; Objects.equals(placeId, other.placeId)</b>
+<b class="nc">&nbsp;				&amp;&amp; Objects.equals(scheduledDate, other.scheduledDate)</b>
+<b class="nc">&nbsp;				&amp;&amp; Objects.equals(scheduledFinishTime, other.scheduledFinishTime)</b>
+<b class="nc">&nbsp;				&amp;&amp; Objects.equals(scheduledStartTime, other.scheduledStartTime)</b>
+<b class="nc">&nbsp;				&amp;&amp; Objects.equals(sportId, other.sportId);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

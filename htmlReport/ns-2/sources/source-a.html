@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > SchedulingConverterService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.business.service</a>
+</div>
+
+<h1>Coverage Summary for Class: SchedulingConverterService (br.edu.ifpb.dac.sape.business.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SchedulingConverterService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16,7%
+  </span>
+  <span class="absValue">
+    (1/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    1,7%
+  </span>
+  <span class="absValue">
+    (1/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.business.service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import br.edu.ifpb.dac.sape.model.entity.Scheduling;
+&nbsp;import br.edu.ifpb.dac.sape.model.enums.IsPresent;
+&nbsp;import br.edu.ifpb.dac.sape.model.enums.StatusScheduling;
+&nbsp;import br.edu.ifpb.dac.sape.presentation.dto.SchedulingDTO;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class SchedulingConverterService {</b>
+&nbsp;	
+&nbsp;	@Autowired 
+&nbsp;	private DateConverterService dateConverter;
+&nbsp;	
+&nbsp;	@Autowired
+&nbsp;	private PlaceService placeService;
+&nbsp;	
+&nbsp;	@Autowired
+&nbsp;	private SportService sportService;
+&nbsp;	
+&nbsp;	@Autowired
+&nbsp;	private UserService userService;
+&nbsp;	
+&nbsp;	public Scheduling dtoToScheduling(SchedulingDTO dto) throws Exception {
+<b class="nc">&nbsp;		if (dto != null) {</b>
+<b class="nc">&nbsp;			Scheduling entity = new Scheduling();</b>
+&nbsp;			
+<b class="nc">&nbsp;			entity.setId(dto.getId());</b>
+<b class="nc">&nbsp;			entity.setScheduledDate(dateConverter.stringToDate(dto.getScheduledDate()));</b>
+<b class="nc">&nbsp;			entity.setScheduledStartTime(dateConverter.stringToTime(dto.getScheduledStartTime()));</b>
+<b class="nc">&nbsp;			entity.setScheduledFinishTime(dateConverter.stringToTime(dto.getScheduledFinishTime()));</b>
+<b class="nc">&nbsp;			entity.setPlace(placeService.findById(dto.getPlaceId()));</b>
+<b class="nc">&nbsp;			entity.setSport(sportService.findById(dto.getSportId()));</b>
+<b class="nc">&nbsp;			entity.setCreator(userService.findByRegistration(dto.getCreator()).orElse(null));</b>
+&nbsp;			
+<b class="nc">&nbsp;			if(entity.getPlace().isPublic() == true) {</b>
+<b class="nc">&nbsp;				entity.setStatus(StatusScheduling.CONFIRMED);</b>
+&nbsp;			}else {
+<b class="nc">&nbsp;				entity.setStatus(StatusScheduling.PENDING);</b>
+&nbsp;			}
+&nbsp;			
+<b class="nc">&nbsp;			entity.setWillBePresent(dto.getWillBePresent());</b>
+&nbsp;			
+&nbsp;			
+<b class="nc">&nbsp;			return entity;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public SchedulingDTO schedulingToDto(Scheduling entity) throws Exception {
+<b class="nc">&nbsp;		if (entity != null) {</b>
+<b class="nc">&nbsp;			SchedulingDTO dto = new SchedulingDTO();</b>
+&nbsp;			
+<b class="nc">&nbsp;			dto.setId(entity.getId());</b>
+<b class="nc">&nbsp;			dto.setScheduledDate(dateConverter.dateToString(entity.getScheduledDate()));</b>
+<b class="nc">&nbsp;			dto.setScheduledStartTime(dateConverter.timeToString(entity.getScheduledStartTime()));</b>
+<b class="nc">&nbsp;			dto.setScheduledFinishTime(dateConverter.timeToString(entity.getScheduledFinishTime()));</b>
+<b class="nc">&nbsp;			dto.setPlaceId(entity.getPlace().getId());</b>
+<b class="nc">&nbsp;			dto.setSportId(entity.getSport().getId());</b>
+<b class="nc">&nbsp;			dto.setCreator(entity.getCreator().getRegistration());</b>
+<b class="nc">&nbsp;			dto.getStatus();</b>
+<b class="nc">&nbsp;			dto.setStatus(entity.getStatus());</b>
+<b class="nc">&nbsp;			dto.setWillBePresent(IsPresent.YES);</b>
+&nbsp;			
+&nbsp;			
+<b class="nc">&nbsp;			return dto;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public List&lt;Scheduling&gt; dtosToScheduling(List&lt;SchedulingDTO&gt; dtoList) throws Exception {
+&nbsp;		
+<b class="nc">&nbsp;		if (dtoList != null ) {</b>
+<b class="nc">&nbsp;			List&lt;Scheduling&gt; entityList = new ArrayList&lt;&gt;();</b>
+&nbsp;			
+<b class="nc">&nbsp;			Scheduling entity = null;</b>
+&nbsp;			
+<b class="nc">&nbsp;			if (!dtoList.isEmpty()) {</b>
+<b class="nc">&nbsp;				for (SchedulingDTO dto: dtoList) {</b>
+<b class="nc">&nbsp;					entity = dtoToScheduling(dto);</b>
+<b class="nc">&nbsp;					entityList.add(entity);</b>
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+&nbsp;			
+<b class="nc">&nbsp;			return entityList;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public List&lt;SchedulingDTO&gt; schedulingToDtos(List&lt;Scheduling&gt; entityList) throws Exception {
+<b class="nc">&nbsp;		if (entityList != null) {</b>
+<b class="nc">&nbsp;			List&lt;SchedulingDTO&gt; dtoList = new ArrayList&lt;&gt;();</b>
+&nbsp;			
+<b class="nc">&nbsp;			SchedulingDTO dto = null;</b>
+&nbsp;			
+<b class="nc">&nbsp;			if (!entityList.isEmpty()) {</b>
+<b class="nc">&nbsp;				for (Scheduling scheduling: entityList) {</b>
+<b class="nc">&nbsp;					dto = schedulingToDto(scheduling);</b>
+<b class="nc">&nbsp;					dtoList.add(dto);</b>
+<b class="nc">&nbsp;				}</b>
+&nbsp;			}
+&nbsp;			
+<b class="nc">&nbsp;			return dtoList;</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		throw new IllegalArgumentException(&quot;Não foi possível converter pois o objeto é nulo&quot;);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	public Scheduling dtoRequestToSchedulinng(Integer placeId, Integer sportId, String date) throws Exception {
+<b class="nc">&nbsp;		Scheduling entity = new Scheduling();</b>
+&nbsp;		
+<b class="nc">&nbsp;		if(date != null) {</b>
+<b class="nc">&nbsp;			entity.setScheduledDate(dateConverter.stringToDate(date));</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if(placeId != null) {</b>
+<b class="nc">&nbsp;			entity.setPlace(placeService.findById(placeId));</b>
+&nbsp;		}
+<b class="nc">&nbsp;		if(sportId != null) {</b>
+<b class="nc">&nbsp;			entity.setSport(sportService.findById(sportId));</b>
+&nbsp;		}
+&nbsp;		
+<b class="nc">&nbsp;		return entity;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>

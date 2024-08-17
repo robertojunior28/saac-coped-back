@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > SuapServiceInterface</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.edu.ifpb.dac.sape.business.service</a>
+</div>
+
+<h1>Coverage Summary for Class: SuapServiceInterface (br.edu.ifpb.dac.sape.business.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SuapServiceInterface</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.edu.ifpb.dac.sape.business.service;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public interface SuapServiceInterface {
+&nbsp;	
+&nbsp;	// URLs usadas
+&nbsp;	public static final String OBTAIN_TOKEN_URL = &quot;https://suap.ifpb.edu.br/api/jwt/obtain_token/&quot;;
+&nbsp;	public static final String EMPLOYEES_URL = &quot;https://suap.ifpb.edu.br/api/recursos-humanos/servidores/v1/&quot;;
+&nbsp;	public static final String STUDENTS_URL = &quot;https://suap.ifpb.edu.br/api/ensino/alunos/v1/&quot;;
+&nbsp;	
+&nbsp;	// Campos de login
+&nbsp;	public static final String USERNAME_JSON_FIELD = &quot;username&quot;;
+&nbsp;	public static final String PASSWORD_JSON_FIELD = &quot;password&quot;;
+&nbsp;	
+&nbsp;	// Dados do header de autenticação
+&nbsp;	public static final String TOKEN_HEADER_NAME = &quot;Authorization&quot;;
+&nbsp;	public static final String TOKEN_HEADER_VALUE = &quot;Bearer %s&quot;;
+&nbsp;	
+&nbsp;	// Header default
+<b class="nc">&nbsp;	public static final Map&lt;String, String&gt; DEFAULT_HEADERS = Map.of(&quot;Content-type&quot;, &quot;application/json&quot;);</b>
+&nbsp;	
+&nbsp;	// * * Métodos * *
+&nbsp;	
+&nbsp;	// Obter token
+&nbsp;	public String login(String username, String password);
+&nbsp;	
+&nbsp;	// Encontra todos os servidores
+&nbsp;	public String findEmployee(String token);
+&nbsp;	// Encontra servidor específico
+&nbsp;	public String findEmployee(String token, String username);
+&nbsp;	
+&nbsp;	// Encontra todos os alunos
+&nbsp;	public String findStudent(String token);
+&nbsp;	// Encontra aluno específico
+&nbsp;	public String findStudent(String token, String username);
+&nbsp;	
+&nbsp;	// Encontrar usuário de qualquer tipo
+&nbsp;	public String findUser(String token, String username);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-23 14:23</div>
+</div>
+</body>
+</html>
